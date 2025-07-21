@@ -11,78 +11,162 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Primeiro projeto flutter',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Flutter: Primeiros Passos'),
+          title: const Text('Tarefas'),
+          leading: Container(),
+          backgroundColor: Colors.blue, // Cor de fundo azul
         ),
-        body: Container(
-          color: Colors.white,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                color: Colors.red,
-                height: 100,
-                width: 100,
+        body: ListView(
+          children: const [
+            Padding(
+              padding: EdgeInsets.only(top: 8),
+              child: Tasks(
+                'Estudar Flutter',
               ),
-              Container(
-                color: Colors.blue,
-                height: 100,
-                width: 100,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    color: Colors.cyan,
-                    height: 50,
-                    width: 50,
-                  ),
-                  Container(
-                    color: Colors.pinkAccent,
-                    height: 50,
-                    width: 50,
-                  ),
-                  Container(
-                    color: Colors.purple,
-                    height: 50,
-                    width: 50,
-                  ),
-                ],
-              ),
-              Container(
-                color: Colors.amber,
-                height: 30,
-                width: 300,
-                child: const Text(
-                  'Texto Romulo', // palavra aleatoria
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 28,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  print('Você apertou o Botão!');
-                },
-                child: const Text('Aperte o botão!!'),
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-              )
-            ],
-          ),
+            ),
+            Tasks(
+              'Andar de Bike',
+            ),
+            Tasks(
+              'Ler',
+            ),
+            Tasks(
+              'Estudar Dart',
+            ),
+            Tasks(
+              'Estudar Java',
+            ),
+            Tasks(
+              'Estudar Spring boot',
+            ),
+          ],
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          print('Você apertou o FAB!');
-        },child: const Icon(Icons.add),),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {print("Você clicou no botão!");},
+        ),
       ),
     );
   }
 }
+
+class Tasks extends StatefulWidget {
+  final String nome;
+  const Tasks(this.nome,{Key? key}) : super(key: key);
+
+  @override
+  State<Tasks> createState() => _TasksState();
+}
+
+class _TasksState extends State<Tasks> {
+
+  @override
+  int nivel = 0;
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                color: Colors.blue,
+              ),
+              height: 140,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    color: Colors.white,
+                  ),
+                  height: 100,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(width: 72,height: 100,color: Colors.black26,),
+                      Container(
+                        width: 200,
+                        child: Text(
+                          widget.nome,
+                          style: const TextStyle(
+                              fontSize: 24,
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Container(
+                          height: 60,
+                          width: 60,
+                          child: ElevatedButton(
+                            onPressed: (){
+                              setState((){
+                                nivel++;
+                                print('vc clicou no botao UP');
+                              });
+
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue, // Cor de fundo do botão
+                              foregroundColor: Colors.white, // Cor do ícone e texto
+                              padding: EdgeInsets.zero,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                              children: const [
+                                Icon(Icons.arrow_drop_up),
+                                Text(
+                                  'UP',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 8,
+                      ),
+                      child: Container(
+                        width: 200,
+                        child: LinearProgressIndicator(
+                          color: Colors.white,
+                          value: nivel/10,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        'Nivel: $nivel',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
