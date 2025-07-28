@@ -70,7 +70,7 @@ class MyFirstWidget extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
-        print('Você apertou o FAB!');
+        //print('Você apertou o FAB!');
       },child: const Icon(Icons.add),),
     );
   }
