@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:primeiro_projeto/data/task_inherited.dart';
 import 'package:primeiro_projeto/screens/form_screen.dart';
 import 'package:primeiro_projeto/screens/initial_screen.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Primeiro projeto flutter',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const InitialScrenn(),
+      home: TaskInherited(child: const InitialScrenn()),
     );
   }
 }
