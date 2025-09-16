@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Primeiro projeto flutter',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: TaskInherited(child: const InitialScrenn()),
+      home: TaskInherited(child: const InitialScreen()),
     );
   }
 }
